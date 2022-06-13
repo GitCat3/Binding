@@ -31,14 +31,17 @@ public class EntityInteractEvent {
             CompoundTag nbt = new CompoundTag();
             ItemStack newitem = ItemInit.BOUND_BOOK.get().asItem().getDefaultInstance();
             Map<Enchantment, Integer> enchant = EnchantmentHelper.deserializeEnchantments(EnchantedBookItem.getEnchantments(item));
-            if(target instanceof Allay && item.getItem() instanceof EnchantedBookItem && enchant.containsKey(Enchantments.BINDING_CURSE) && enchant.get(Enchantments.BINDING_CURSE) > 0) {
+            if(target instanceof Allay allay && item.getItem() instanceof EnchantedBookItem && enchant.containsKey(Enchantments.BINDING_CURSE) && enchant.get(Enchantments.BINDING_CURSE) > 0) {
                 target.save(nbt);
                 player.setItemInHand(player.getUsedItemHand(), newitem);
                 target.remove(Entity.RemovalReason.DISCARDED);
                 CompoundTag newnbt = newitem.getOrCreateTag();
                 newnbt.put("entity", nbt);
-                newnbt.putString("held_item", Component.Serializer.toJson(Component.nullToEmpty(((Allay) target).getMainHandItem().getItem().toString())));
-                //System.out.println(Component.Serializer.toJson(Component.nullToEmpty(((Allay) target).getMainHandItem().getItem().toString())));
+                if(!allay.getMainHandItem().isEmpty()) {
+                    newnbt.putString("held_item", Component.Serializer.toJson(allay.getMainHandItem().getDisplayName()));
+                }else {
+                    newnbt.putString("held_item", Component.Serializer.toJson(Component.empty()));
+                }
                 newnbt.putString("name", Component.Serializer.toJson(target.getName()));
             }
         }
