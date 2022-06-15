@@ -1,6 +1,7 @@
 package me.give_me_moneyz.binding.core.events;
 
 import me.give_me_moneyz.binding.Binding;
+import me.give_me_moneyz.binding.core.capability.MagnetismCapability;
 import me.give_me_moneyz.binding.core.init.EnchantmentInit;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -14,7 +15,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Binding.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -23,13 +23,17 @@ public class AllayEnchantmentTick {
     public static void doMagnet(final TickEvent.PlayerTickEvent event) {
         Player player = event.player;
         Level world = player.getCommandSenderWorld();
-        if(player.hasItemInSlot(EquipmentSlot.CHEST) && EnchantmentHelper.getItemEnchantmentLevel(EnchantmentInit.ALLAY_ENCHANT.get(), player.getItemBySlot(EquipmentSlot.CHEST)) > 0) {
-            CompoundTag nbt = player.getItemBySlot(EquipmentSlot.CHEST).getOrCreateTag();
-            Vec3 playervec = new Vec3(player.getX(), player.getY(), player.getZ());
-            List<ItemEntity> entities = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(playervec, 6, 6, 6));
-            for(ItemEntity item : entities) {
-                if(item.getItem().getDisplayName().equals(Component.Serializer.fromJson(nbt.getString("magnet_item")))) {
-                    item.setDeltaMovement(item.getDeltaMovement().add(new Vec3(playervec.x - item.getX(), playervec.y - item.getY(), playervec.z - item.getZ())));
+        if(!world.isClientSide) {
+            if(player.getCapability(MagnetismCapability.INSTANCE).orElseThrow(() -> new RuntimeException("capability not found")).ismagneting()) {
+                if(player.hasItemInSlot(EquipmentSlot.CHEST) && EnchantmentHelper.getTagEnchantmentLevel(EnchantmentInit.ALLAY_ENCHANT.get(), player.getItemBySlot(EquipmentSlot.CHEST)) > 0) {
+                    CompoundTag nbt = player.getItemBySlot(EquipmentSlot.CHEST).getOrCreateTag();
+                    Vec3 playervec = new Vec3(player.getX(), player.getY(), player.getZ());
+                    List<ItemEntity> entities = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(playervec, 10, 10, 10));
+                    for(ItemEntity item : entities) {
+                        if(item.getItem().getDisplayName().equals(Component.Serializer.fromJson(nbt.getString("magnet_item")))) {
+                            item.setDeltaMovement(item.getDeltaMovement().add(new Vec3(playervec.x - item.getX(), playervec.y - item.getY(), playervec.z - item.getZ())).normalize().scale(0.1));
+                        }
+                    }
                 }
             }
         }

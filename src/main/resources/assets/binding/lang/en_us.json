@@ -1,5 +1,6 @@
 {
   "item.binding.bound_book": "Bound Book",
-  "tooltip.binding.bound_book": "You have captured %s",
-  "enchantment.binding.allay_enchantment": "Trapped Allay"
+  "tooltip.binding.bound_book": "Your %s is holding %s",
+  "enchantment.binding.allay_enchantment": "Trapped Allay",
+  "key.binding.magnetism": "Test Key"
 }

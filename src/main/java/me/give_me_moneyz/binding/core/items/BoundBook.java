@@ -35,7 +35,7 @@ public class BoundBook extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, world, tooltip, flagIn);
         if(Screen.hasShiftDown() && Component.Serializer.fromJson(stack.getOrCreateTag().getString("name")) != null) {
-            tooltip.add(Component.translatable("tooltip.binding.bound_book", Component.Serializer.fromJson(stack.getOrCreateTag().getString("name"))).withStyle(ChatFormatting.RED));
+            tooltip.add(Component.translatable("tooltip.binding.bound_book", Component.Serializer.fromJson(stack.getOrCreateTag().getString("name")).withStyle(ChatFormatting.AQUA), Component.Serializer.fromJson(stack.getOrCreateTag().getString("held_item")).withStyle(ChatFormatting.RED)));
         }
     }
 

@@ -3,7 +3,7 @@ package me.give_me_moneyz.binding.core.events;
 import me.give_me_moneyz.binding.Binding;
 import me.give_me_moneyz.binding.core.init.EnchantmentInit;
 import me.give_me_moneyz.binding.core.init.ItemInit;
-import me.give_me_moneyz.binding.util.ItemUtils;
+import me.give_me_moneyz.binding.util.ArmorUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -16,7 +16,7 @@ import java.util.Objects;
 public class AnvilItemEvent {
     @SubscribeEvent
     public static void ItemsInAnvil(final AnvilUpdateEvent event) {
-        if(ItemUtils.CHESPLATES.contains(event.getLeft().getItem()) && event.getRight().getItem() == ItemInit.BOUND_BOOK.get()) {
+        if(ArmorUtils.CHESPLATES.contains(event.getLeft().getItem()) && event.getRight().getItem() == ItemInit.BOUND_BOOK.get()) {
             if(!Objects.equals(Component.Serializer.fromJson(event.getRight().getOrCreateTag().getString("held_item")), Component.empty())) {
                 ItemStack newitem = event.getLeft().copy();
                 newitem.enchant(EnchantmentInit.ALLAY_ENCHANT.get(), 1);
