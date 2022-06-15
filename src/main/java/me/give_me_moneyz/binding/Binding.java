@@ -20,7 +20,7 @@ import org.lwjgl.glfw.GLFW;
 public class Binding {
 
     public static final String MOD_ID = "binding";
-    public static final KeyMapping MAGNETISM = new KeyMapping("key.binding.magnetism", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_M, KeyMapping.CATEGORY_MISC);
+    public static final KeyMapping MAGNETISM = new KeyMapping("key.binding.magnetism", KeyConflictContext.UNIVERSAL, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_M, "category.binding.allay_abilities");
 
     public Binding() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
