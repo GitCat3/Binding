@@ -1,7 +1,7 @@
 {
   "item.binding.bound_book": "Bound Book",
   "tooltip.binding.bound_book": "Your %s is holding %s",
-  "enchantment.binding.allay_enchantment": "Trapped Allay",
+  "enchantment.binding.magnet_enchant": "Magnetism",
   "key.binding.magnetism": "Magnetism",
   "category.binding.allay_abilities": "Allay Abilities"
 }

@@ -19,7 +19,7 @@ public class AnvilItemEvent {
         if(event.getLeft().canEquip(EquipmentSlot.CHEST, event.getPlayer()) && event.getRight().getItem() == ItemInit.BOUND_BOOK.get()) {
             if(!Objects.equals(Component.Serializer.fromJson(event.getRight().getOrCreateTag().getString("held_item")), Component.empty())) {
                 ItemStack newitem = event.getLeft().copy();
-                newitem.enchant(EnchantmentInit.ALLAY_ENCHANT.get(), 1);
+                newitem.enchant(EnchantmentInit.MAGNET_ENCHANT.get(), 1);
                 newitem.getOrCreateTag().putString("magnet_item", event.getRight().getOrCreateTag().getString("held_item"));
                 event.setOutput(newitem);
                 event.setCost(5);

@@ -25,7 +25,7 @@ public class AllayEnchantmentTick {
         Level world = player.getCommandSenderWorld();
         if(!world.isClientSide) {
             if(player.getCapability(MagnetismCapability.INSTANCE).orElseThrow(() -> new RuntimeException("capability not found")).ismagneting()) {
-                if(player.hasItemInSlot(EquipmentSlot.CHEST) && EnchantmentHelper.getTagEnchantmentLevel(EnchantmentInit.ALLAY_ENCHANT.get(), player.getItemBySlot(EquipmentSlot.CHEST)) > 0) {
+                if(player.hasItemInSlot(EquipmentSlot.CHEST) && EnchantmentHelper.getTagEnchantmentLevel(EnchantmentInit.MAGNET_ENCHANT.get(), player.getItemBySlot(EquipmentSlot.CHEST)) > 0) {
                     CompoundTag nbt = player.getItemBySlot(EquipmentSlot.CHEST).getOrCreateTag();
                     Vec3 playervec = new Vec3(player.getX(), player.getY(), player.getZ());
                     List<ItemEntity> entities = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(playervec, 10, 10, 10));

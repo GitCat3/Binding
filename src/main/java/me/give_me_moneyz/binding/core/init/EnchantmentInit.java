@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class EnchantmentInit {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, Binding.MOD_ID);
-    public static RegistryObject<Enchantment> ALLAY_ENCHANT = ENCHANTMENTS.register("allay_enchantment", () -> new AllayEnchantment(Enchantment.Rarity.VERY_RARE, null, EquipmentSlot.CHEST));
+    public static RegistryObject<Enchantment> MAGNET_ENCHANT = ENCHANTMENTS.register("magnet_enchant", () -> new AllayEnchantment(Enchantment.Rarity.VERY_RARE, null, EquipmentSlot.CHEST));
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);
     }
