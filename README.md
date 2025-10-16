@@ -1,0 +1,1 @@
+This is the repo for one of my first Minecraft mods, "Binding". This mod allows you to "bind" an Allay to a curse of binding book and either move it somewhere else, or be morally ambiguous and enchant your armor with it to get some cool effects.
